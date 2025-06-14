@@ -1,0 +1,18 @@
+<template>
+    <lightning-modal-header label="LWC Hello World"></lightning-modal-header>
+    <lightning-modal-body> {fullname}
+        <br/>
+        <div class="slds-m-around_medium">
+    {courseName} is a course of {course.subject} subject.
+        <br/>
+      <lightning-input type="text" label="Enter Course Name" onchange={callHandler} value = {courseName}></lightning-input>
+     <br/>
+     </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button label="OK"></lightning-button>
+    </lightning-modal-footer>
+
+
+</template>
