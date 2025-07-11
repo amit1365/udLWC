@@ -1,0 +1,44 @@
+<template>
+    <lightning-modal-header label="@track Uses"></lightning-modal-header>
+    <lightning-modal-body> 
+        <div class="slds-m-around_medium">
+            Enter your full address
+        <br/>
+      <lightning-input type="text" label="City" onchange={callHandler} value = {addressObj.city}></lightning-input>
+      <lightning-input type="text" label="State" onchange={callHandler2} value = {addressObj.state}></lightning-input>
+      <lightning-input type="text" label="Country" onchange={callHandler3} value = {addressObj.country}></lightning-input>
+      <lightning-input type="number" label="Pin" onchange={callHandler4} value = {addressObj.pin}></lightning-input>
+     <br/>
+     </div>
+
+     <div class="slds-m-around_medium">
+        Here is the address you entered:
+        <br/>
+        <span class="slds-text-color_success">
+            {addressObj.city}, {addressObj.state}, {addressObj.country} - {addressObj.pin}
+        </span>
+        <br/>
+    </div>
+
+    <br/>
+    <br/>
+
+    <div>
+        <lightning-input type ="number" label="Enter a number"  value={number1} onchange={num1change}></lightning-input>
+        <lightning-input type ="number" label="Enter another number" value={number2} onchange={num2change}></lightning-input>
+
+    </div>
+    <div>
+        The sum of the two numbers is: {summ}
+    </div>
+
+    </lightning-modal-body>
+
+    
+
+    <!--<lightning-modal-footer>
+        <lightning-button label="OK"></lightning-button>
+    </lightning-modal-footer>
+-->
+
+</template>
