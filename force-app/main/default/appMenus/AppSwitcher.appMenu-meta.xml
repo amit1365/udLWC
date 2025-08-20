@@ -41,19 +41,23 @@
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
+        <name>standard__Insights</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>standard__LightningSalesConsole</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>standard__LightningService</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
         <name>standard__LightningSales</name>
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
-        <name>standard__AllTabSet</name>
-        <type>CustomApplication</type>
-    </appMenuItems>
-    <appMenuItems>
-        <name>CPQIntegrationUserApp</name>
-        <type>ConnectedApp</type>
-    </appMenuItems>
-    <appMenuItems>
-        <name>standard__LightningBolt</name>
+        <name>standard__LightningInstrumentation</name>
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
@@ -61,7 +65,39 @@
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
+        <name>standard__AllTabSet</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>standard__QueueManagement</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>standard__DataManager</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>standard__RevenueCloudConsole</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
         <name>standard__SalesCloudMobile</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>standard__LightningScheduler</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>standard__LightningBolt</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>standard__FlowsApp</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>Dev1</name>
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
@@ -69,11 +105,27 @@
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
+        <name>standard__DataGovernanceConsole</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
         <name>standard__MSJApp</name>
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
-        <name>UdemyZeroHour</name>
+        <name>DEVHUB_6qcehavnbunu51t23gao</name>
+        <type>ConnectedApp</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>dlrs__DeclarativeLookupRollupSummaries</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>dlrs__DeclarativeLookupRollupSummaries2</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>Test_App</name>
         <type>CustomApplication</type>
     </appMenuItems>
 </AppMenu>

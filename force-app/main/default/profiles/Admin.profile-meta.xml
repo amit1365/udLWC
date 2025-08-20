@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
-    <applicationVisibilities>
-        <application>UdemyZeroHour</application>
-        <default>false</default>
-        <visible>true</visible>
-    </applicationVisibilities>
     <custom>false</custom>
-    <tabVisibilities>
-        <tab>LWC_Fundamentals</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>
     <userLicense>Salesforce</userLicense>
     <userPermissions>
         <enabled>true</enabled>
@@ -46,6 +37,14 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ApiEnabled</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>AppFrameworkManageApp</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>AppFrameworkManageTemplate</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -161,15 +160,15 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>CreatePackaging</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>CreateReportFolders</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
         <name>CreateTopics</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>CreateWorkBadgeDefinition</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -294,10 +293,6 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ExternalClientAppViewer</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>FieldServiceAccess</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -569,6 +564,10 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>ModifyAllPolicyCenterPolicies</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>ModifyDataClassification</name>
     </userPermissions>
     <userPermissions>
@@ -597,7 +596,15 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>Packaging2PromoteVersion</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>PrivacyDataAccess</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>PublishPackaging</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -622,10 +629,6 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>SendCustomNotifications</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>SendExternalEmailAvailable</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -697,7 +700,23 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>UseFulfillmentAPIs</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>UseOmnichannelInventoryAPIs</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>UseRegisterGuestBuyerAPI</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>UseReturnOrder</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>UseReturnOrderAPIs</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -710,6 +729,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ViewAllData</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewAllPolicyCenterPolicies</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -782,10 +805,6 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ViewRoles</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ViewSALifecycle</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
