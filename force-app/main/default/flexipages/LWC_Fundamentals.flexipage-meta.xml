@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>helloWorld</componentName>
+                <identifier>c_helloWorld</identifier>
+            </componentInstance>
+        </itemInstances>
         <name>region1</name>
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>parent1</componentName>
+                <identifier>c_parent1</identifier>
+            </componentInstance>
+        </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentName>randomThings</componentName>
@@ -15,16 +27,24 @@
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>trackProperty</componentName>
+                <identifier>c_trackProperty</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>conditionalRendering</componentName>
+                <identifier>c_conditionalRendering</identifier>
+            </componentInstance>
+        </itemInstances>
         <name>region3</name>
-        <type>Region</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <name>region4</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>LWC Fundamentals</masterLabel>
     <template>
-        <name>flexipage:appHomeTemplateHeaderThreeColumns</name>
+        <name>flexipage:appHomeTemplateThreeColumns</name>
     </template>
     <type>AppPage</type>
 </FlexiPage>
