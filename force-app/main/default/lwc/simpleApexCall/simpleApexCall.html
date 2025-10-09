@@ -1,0 +1,22 @@
+<template>    
+    <lightning-card title="Update Account">
+        <div class="slds-p-around_medium">
+            <lightning-input                
+                type="text"                
+                label="Account Name"                
+                value={accountName}                
+                onchange={handleNameChange}>            
+            </lightning-input>            
+            
+            <p>Industry: {accountIndustry}</p>        
+        </div>        
+        
+        <footer class="slds-card__footer">
+            <lightning-button 
+            label="Update Name" 
+            onclick={handleUpdateClick}>
+            </lightning-button>        
+        </footer>    
+    
+    </lightning-card>
+</template>
