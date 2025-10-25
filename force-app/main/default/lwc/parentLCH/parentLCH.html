@@ -1,0 +1,33 @@
+<!--LifeCycleHooks Parent-->
+<template>
+    <lightning-card title="Parent">
+        <h1>PARENT COMPONENT</h1>
+
+        <div class="testClass1">
+            This is parent LWC component
+        </div>
+
+        <template lwc:if={isChildVisible}>
+            <c-child-l-c-h>
+                <span slot="slot1">This is slot 1 content from PARENT LWC</span>
+                <span slot="slot2">This is slot 2 content from PARENT LWC</span>
+            </c-child-l-c-h>
+
+            <br>
+            <lightning-button
+                label="Hide Child"
+                variant="brand"
+                onclick={toggleChildCmp}>
+            </lightning-button>
+        </template>
+
+        <template lwc:else>
+            <p>Child component is hidden. Click on Show Child button to display it again.</p>
+            <lightning-button
+                label="Show Child"
+                variant="brand"
+                onclick={toggleChildCmp}>
+            </lightning-button>
+        </template>
+    </lightning-card>
+</template>

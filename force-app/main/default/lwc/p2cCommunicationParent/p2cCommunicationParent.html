@@ -1,0 +1,54 @@
+<!--Parent to Child Communication for different types of datatypes-->
+
+
+<template>
+    <lightning-modal-header label="Parent to Child Communication"></lightning-modal-header>
+    
+
+    <lightning-modal-body> 
+        <p class="slds-p-horizontal_small"></p>
+        <c-p2c-child-simple-datatype
+            number-value=50
+            bool-value={boolValue}
+            string-value={stringValue}
+        ></c-p2c-child-simple-datatype>
+    </lightning-modal-body>
+
+
+
+    <lightning-modal-body> 
+        <lightning-card title="P2C COMPLEX DATATYPE" icon-name="custom:custom14">
+        <div class="slds-p-left_large slds-p-right_large">
+
+        <p class="slds-p-horizontal_small"></p>
+        <c-p2c-child-complex-datatype
+            array-of-structures={arrayOfStructures}
+        ></c-p2c-child-complex-datatype>
+        </div>
+        </lightning-card>
+    </lightning-modal-body>
+
+
+
+
+    <lightning-modal-body> 
+
+        <lightning-card title="P2C on PARENT ACTION" icon-name="custom:custom14">
+        <div class="slds-p-left_large slds-p-right_large">
+
+        <p class="slds-p-horizontal_small">
+            <lightning-input type="number" name="inputNumber" label="Input the number" value={percentageNumber} onchange={numberChangeHandler}></lightning-input>
+        </p>
+
+        <p class="slds-p-top_large"> </p>
+        <c-p2c-child-on-parent-action
+            percentage-value={percentageNumber}
+        ></c-p2c-child-on-parent-action>
+        </div>
+        </lightning-card>
+
+    </lightning-modal-body>
+
+
+    
+</template>
