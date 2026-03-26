@@ -3,8 +3,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>helloWorld</componentName>
-                <identifier>c_helloWorld</identifier>
+                <componentName>p2cCommunicationParent</componentName>
+                <identifier>c_p2cCommunicationParent</identifier>
             </componentInstance>
         </itemInstances>
         <name>region1</name>
@@ -13,14 +13,14 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>parent1</componentName>
-                <identifier>c_parent1</identifier>
+                <componentName>c2pParent</componentName>
+                <identifier>c_c2pParent</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
             <componentInstance>
-                <componentName>randomThings</componentName>
-                <identifier>c_randomThings</identifier>
+                <componentName>helloWorld</componentName>
+                <identifier>c_helloWorld</identifier>
             </componentInstance>
         </itemInstances>
         <name>region2</name>
@@ -29,14 +29,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>trackProperty</componentName>
-                <identifier>c_trackProperty</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentName>conditionalRendering</componentName>
-                <identifier>c_conditionalRendering</identifier>
+                <componentName>parentLCH</componentName>
+                <identifier>c_parentLCH</identifier>
             </componentInstance>
         </itemInstances>
         <name>region3</name>

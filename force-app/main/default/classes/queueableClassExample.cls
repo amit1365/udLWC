@@ -1,11 +1,15 @@
 public class queueableClassExample implements Queueable{
     
-    public Set<Id> accountIdSet; 
+    public Set<Id> accountIdSet;
+    public list<Account> accountList;
     
-    public queueableClassExample(Set<Id> accountIddSet){
+    //contructor, it can take sObjects as parameters as well
+    public queueableClassExample(Set<Id> accountIddSet, List<account> accountList){
         this.accountIdSet = accountIddSet;
+        this.accountList = accountList;
     }
     
+    //execute method
     public void execute(QueueableContext context){
         List <account> accList = [SELECT Id, Name, Description 
                                   FROM Account 
@@ -30,5 +34,5 @@ public class queueableClassExample implements Queueable{
      * Set<Id> accIdSet = new Set<Id>();
      *for(account acc: accList)
      *accIdSet.add(acc.Id);
-     *System.enqueueJob(new queueableClassExample(accIdSet));
+     *Id jobId= System.enqueueJob(new queueableClassExample(accIdSet, accList));
 	 */
