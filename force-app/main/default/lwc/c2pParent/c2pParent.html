@@ -1,0 +1,23 @@
+<template>
+    <lightning-modal-header label="Child to Parent Communication"></lightning-modal-header>
+
+    <lightning-modal-body>
+        <p class="slds-p-horizontal_small"></p>
+        This is parent modal. Click the button below to show the child component.
+        The child component will call the parent component through simple event.
+        <p class="slds-p-horizontal_small"></p>
+
+        <!-- Always render child INSIDE the parent modal; toggle its visibility only -->
+        <template lwc:if={showChild}>
+            <c-c2p-child-simple-event 
+            onclose={handleChildClose}>
+        
+        </c-c2p-child-simple-event>
+        </template>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button label="Show Child" onclick={showChildModal} disabled={showChild}></lightning-button>
+        <lightning-button label="Close Child" onclick={handleChildClose} if:true={showChild} class="slds-m-left_small"></lightning-button>
+    </lightning-modal-footer>
+</template>

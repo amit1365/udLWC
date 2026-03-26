@@ -24,4 +24,8 @@ percentageNumber = 20;
 numberChangeHandler(event){
     this.percentageNumber = event.target.value;
 }
+resetTheSlider(event){
+    this.template.querySelector('c-p2c-child-method-call').resetSlider();
+}
+
 }
