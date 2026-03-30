@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "path": "c:/Users/amity/OneDrive/Desktop/VS Code/ZHourP/udLWC"
+    }
+  ],
+  "settings": {
+    "eslint.workingDirectories": [
+      "c:/Users/amity/OneDrive/Desktop/VS Code/ZHourP/udLWC"
+    ],
+    "eslint.validate": [
+      "javascript",
+      "typescript"
+    ],
+    "eslint.options": {
+      "overrideConfigFile": "c:\\Users\\amity\\OneDrive\\Desktop\\VS Code\\ZHourP\\udLWC\\.eslintrc.json"
+    }
+  }
+}

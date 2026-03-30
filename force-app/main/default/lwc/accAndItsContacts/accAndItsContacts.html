@@ -1,0 +1,31 @@
+<template>
+
+    <lightning-card title="Accounts and its Contacts" icon-name="custom:custom63">
+        <div class="slds-m-around_medium"></div>
+
+        <div class="slds-m-around_medium">
+            <lightning-datatable
+            key-field="Id"
+            data={accounts}
+            columns={accountColumns}
+            max-row-selection="1"
+            onrowselection={handleAccountSelection}
+            ></lightning-datatable>
+        </div>
+
+        <template lwc:if = {showContacts}>
+            <div class="slds-m-around_medium slds-box slds-theme_shade">
+                <h3 class="slds-text-heading_small slds-m-bottom_small">Related Contacts</h3>
+            <lightning-datatable
+            key-field="Id"
+            data={contacts}
+            columns={childColumns}
+            hide-checkbox-column
+            ></lightning-datatable>
+        </div>
+
+        </template>
+        </lightning-card>
+
+    
+</template>

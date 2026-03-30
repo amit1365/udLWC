@@ -14,10 +14,22 @@
         
         </c-c2p-child-simple-event>
         </template>
+
+            <template lwc:else>
+                <p class="slds-p-horizontal_small"></p>
+                This is parent modal. Click the button below to show the child component.
+                The child component will call the parent component through simple event.
+                <p class="slds-p-horizontal_small"></p>
+
+                <lightning-modal-footer>
+                    <lightning-button label="Show Child" onclick={showChildModal}></lightning-button>
+                </lightning-modal-footer>
+
+            </template>
+
+        <p>value from child using event: {messageFromChild}</p>
+
     </lightning-modal-body>
 
-    <lightning-modal-footer>
-        <lightning-button label="Show Child" onclick={showChildModal} disabled={showChild}></lightning-button>
-        <lightning-button label="Close Child" onclick={handleChildClose} if:true={showChild} class="slds-m-left_small"></lightning-button>
-    </lightning-modal-footer>
+    
 </template>
