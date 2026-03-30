@@ -1,0 +1,21 @@
+<!--Build a search box that filters Accounts by name as the user types-->
+<template>
+    <lightning-card title="Search Accounts" icon-name="custom:custom63">
+        <div class="slds-m-around_medium"></div>
+    <lightning-input label="Name" value={searchKey} type = "text" onchange={handleSearchKeyChange}> </lightning-input>
+    <div class="slds-m-around_medium"></div>
+
+        <div class="slds-m-around_medium">
+
+
+<lightning-datatable
+          key-field="Id"
+          data={accounts}
+          columns={columns}
+        >
+        </lightning-datatable>
+
+        </div>
+    </lightning-card>
+
+</template>
