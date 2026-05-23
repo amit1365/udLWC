@@ -33,6 +33,18 @@
                 <identifier>c_parentLCH</identifier>
             </componentInstance>
         </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>lmsCompA</componentName>
+                <identifier>c_lmsCompA</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>lmsCompX</componentName>
+                <identifier>c_lmsCompX</identifier>
+            </componentInstance>
+        </itemInstances>
         <name>region3</name>
         <type>Region</type>
     </flexiPageRegions>

@@ -14,6 +14,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>LeadsTriggerStaticVar</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>LightningConnectQuickstart</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -23,6 +27,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>SearchAccountsController</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>SimpleApexCallController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>

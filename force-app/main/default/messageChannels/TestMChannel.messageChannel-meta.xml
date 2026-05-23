@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
-    <masterLabel>TestMChannel</masterLabel>
     <description>messgae channel to send data</description>
     <isExposed>true</isExposed>
     <lightningMessageFields>
@@ -9,6 +8,7 @@
     </lightningMessageFields>
     <lightningMessageFields>
         <description>Payload field 2</description>
-        <fieldName>messageContentinMC</fieldName>
+        <fieldName>messageContent</fieldName>
     </lightningMessageFields>
+    <masterLabel>TestMChannel</masterLabel>
 </LightningMessageChannel>
