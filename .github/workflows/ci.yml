@@ -1,0 +1,43 @@
+name: CI — Lint, Format, Test
+
+# WHEN does this run?
+on:
+  push:
+    branches-ignore:
+      - main          # runs on every branch push EXCEPT main
+  pull_request:
+    branches:
+      - main          # runs on every PR that targets main
+
+jobs:
+  lint-format-test:
+    name: Lint, Prettier, Jest
+    runs-on: ubuntu-latest   # GitHub spins up a fresh Ubuntu machine
+
+    steps:
+      # 1. Download your code onto the GitHub machine
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Install Node.js (needed to run npm commands)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'        # caches node_modules to speed up future runs
+
+      # 3. Install all your dependencies (eslint, jest, prettier, etc.)
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Run ESLint — checks your JS for errors and bad patterns
+      - name: Run ESLint
+        run: npm run lint
+
+      # 5. Run Prettier — checks all files are properly formatted
+      - name: Check Prettier formatting
+        run: npm run prettier:verify
+
+      # 6. Run Jest — runs all your unit tests
+      - name: Run unit tests
+        run: npm test
