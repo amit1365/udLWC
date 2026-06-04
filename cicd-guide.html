@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CI/CD Complete Guide</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 50px 60px;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      text-align: center;
+      padding: 80px 0 60px;
+      border-bottom: 3px solid #e8ecf2;
+      margin-bottom: 50px;
+    }
+    .cover .badge {
+      display: inline-block;
+      background: #7c3aed;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .cover h1 {
+      font-size: 38px;
+      font-weight: 800;
+      color: #0a0a23;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .cover h1 span.ci { color: #0052cc; }
+    .cover h1 span.cd { color: #7c3aed; }
+    .cover p {
+      font-size: 16px;
+      color: #555;
+      max-width: 540px;
+      margin: 0 auto 30px;
+    }
+    .cover .meta {
+      font-size: 12px;
+      color: #999;
+      letter-spacing: 1px;
+    }
+
+    /* ── SECTION ── */
+    .section { margin-bottom: 46px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e8ecf2;
+    }
+    .section-num {
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #7c3aed;
+    }
+    .section-header h2 { font-size: 20px; font-weight: 700; color: #0a0a23; }
+
+    /* ── CODE ── */
+    pre {
+      background: #0d1117;
+      color: #c9d1d9;
+      padding: 20px 24px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 2;
+      margin: 14px 0;
+      overflow-x: auto;
+    }
+    .c  { color: #8b949e; }
+    .k  { color: #79c0ff; }
+    .s  { color: #a5d6ff; }
+    .v  { color: #ffa657; }
+    .ok { color: #3fb950; }
+    .er { color: #f85149; }
+    .p  { color: #d2a8ff; }
+
+    /* ── CONCEPT BOX ── */
+    .concept-box {
+      background: #f8f9ff;
+      border-left: 4px solid #7c3aed;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+    .concept-box h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #7c3aed;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .callout.tip  { background: #f0fdf4; border: 1px solid #86efac; }
+    .callout.warn { background: #fffbeb; border: 1px solid #fcd34d; }
+    .callout.info { background: #eff6ff; border: 1px solid #93c5fd; }
+    .callout.rule { background: #fdf4ff; border: 1px solid #d8b4fe; }
+    .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .callout-body strong { display: block; font-size: 13px; margin-bottom: 4px; color: #0a0a23; }
+    .callout-body p { font-size: 13px; color: #444; }
+
+    /* ── TABLE ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+    thead tr { background: #7c3aed; color: white; }
+    thead th { padding: 10px 14px; text-align: left; font-size: 12px; letter-spacing: 0.5px; }
+    tbody tr:nth-child(even) { background: #f8f9ff; }
+    tbody td { padding: 10px 14px; border-bottom: 1px solid #e8ecf2; vertical-align: top; }
+    tbody td:first-child { font-weight: 600; color: #0a0a23; }
+
+    /* ── TWO COL ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .col-box {
+      border-radius: 8px;
+      padding: 18px;
+      border: 2px solid #e8ecf2;
+    }
+    .col-box.ci { border-color: #93c5fd; background: #eff6ff; }
+    .col-box.cd { border-color: #d8b4fe; background: #fdf4ff; }
+    .col-box h4 { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+    .col-box.ci h4 { color: #1d4ed8; }
+    .col-box.cd h4 { color: #7c3aed; }
+    .col-box ul { list-style: none; }
+    .col-box ul li { font-size: 13px; color: #444; margin-bottom: 6px; padding-left: 18px; position: relative; }
+    .col-box ul li::before { content: '→'; position: absolute; left: 0; color: #888; }
+
+    /* ── FLOW ── */
+    .flow { display: flex; flex-direction: column; gap: 0; margin: 20px 0; }
+    .flow-step { display: flex; align-items: flex-start; gap: 18px; position: relative; }
+    .flow-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 42px;
+      width: 2px;
+      height: calc(100% - 10px);
+      background: #dde3ef;
+    }
+    .flow-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; flex-shrink: 0;
+      border: 2px solid #dde3ef;
+      background: white; z-index: 1;
+    }
+    .flow-icon.local  { border-color: #0052cc; background: #e8f0fe; }
+    .flow-icon.cloud  { border-color: #7c3aed; background: #ede9fe; }
+    .flow-icon.ci     { border-color: #0ea5e9; background: #e0f2fe; }
+    .flow-icon.deploy { border-color: #16a34a; background: #f0fdf4; }
+    .flow-body { padding: 8px 0 24px; flex: 1; }
+    .flow-body strong { display: block; font-size: 15px; color: #0a0a23; margin-bottom: 3px; }
+    .flow-body p { font-size: 13px; color: #555; margin-bottom: 6px; }
+    .flow-body code {
+      background: #0d1117; color: #79c0ff;
+      font-family: 'Courier New', monospace;
+      font-size: 12px; padding: 2px 8px;
+      border-radius: 4px; margin-top: 4px;
+      display: inline-block;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.8px; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 10px; margin-left: 8px;
+      vertical-align: middle;
+    }
+    .tag.local  { background: #e8f0fe; color: #0052cc; }
+    .tag.cloud  { background: #ede9fe; color: #7c3aed; }
+    .tag.auto   { background: #dcfce7; color: #15803d; }
+    .tag.manual { background: #fef3c7; color: #92400e; }
+
+    /* ── QUICK REF ── */
+    .quick-ref {
+      background: #0d1117;
+      border-radius: 10px;
+      padding: 28px 30px;
+      margin: 20px 0;
+    }
+    .quick-ref h3 { color: #8b949e; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+    .quick-ref .qr-group { margin-bottom: 20px; }
+    .quick-ref .qr-label { color: #8b949e; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .quick-ref .qr-line { font-family: 'Courier New', monospace; font-size: 13px; line-height: 2.1; }
+
+    /* ── SECRET BOX ── */
+    .secret-box {
+      background: #0d1117;
+      border: 1px solid #3fb950;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin: 14px 0;
+    }
+    .secret-box .secret-label {
+      color: #3fb950;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-family: 'Courier New', monospace;
+    }
+    .secret-box table { margin: 0; }
+    .secret-box table thead tr { background: #1a2332; }
+    .secret-box table thead th { color: #8b949e; font-size: 11px; }
+    .secret-box table tbody tr { background: transparent; }
+    .secret-box table tbody tr:nth-child(even) { background: #111820; }
+    .secret-box table tbody td { border-color: #21262d; color: #c9d1d9; font-size: 12px; }
+    .secret-box table tbody td:first-child { color: #ffa657; font-family: 'Courier New', monospace; }
+
+    /* ── PAGE BREAK ── */
+    .page-break { page-break-before: always; padding-top: 40px; }
+
+    @media print {
+      body { background: white; }
+      .page { padding: 30px 40px; }
+      pre { white-space: pre-wrap; word-break: break-word; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="badge">Developer Reference</div>
+    <h1><span class="ci">CI</span> / <span class="cd">CD</span><br/>Complete Guide</h1>
+    <p>What it does, when you need it, how to set it up, and what happens at every stage — for your Salesforce LWC project.</p>
+    <div class="meta">CONTINUOUS INTEGRATION &nbsp;·&nbsp; CONTINUOUS DEPLOYMENT &nbsp;·&nbsp; GITHUB ACTIONS &nbsp;·&nbsp; SECRETS</div>
+  </div>
+
+
+  <!-- SECTION 1: WHAT IS CI/CD -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>What Is CI/CD</h2>
+    </div>
+
+    <p style="margin-bottom:16px; color:#555;">CI/CD is automation that runs every time you push or merge code. Instead of you manually running tests and deploying, a machine does it automatically and reports pass or fail.</p>
+
+    <div class="two-col">
+      <div class="col-box ci">
+        <h4>CI — Continuous Integration</h4>
+        <ul>
+          <li>Runs when you push a branch or open a PR</li>
+          <li>Checks: is this code clean and working?</li>
+          <li>Runs lint, format checks, unit tests</li>
+          <li>Blocks the PR if anything fails</li>
+          <li>Prevents broken code from reaching main</li>
+        </ul>
+      </div>
+      <div class="col-box cd">
+        <h4>CD — Continuous Deployment</h4>
+        <ul>
+          <li>Runs when you merge a PR into main</li>
+          <li>Does: ship this code to the live environment</li>
+          <li>For Salesforce: deploys to your org</li>
+          <li>No manual deployment needed</li>
+          <li>Every merge = automatic deploy</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout rule">
+      <div class="callout-icon">📌</div>
+      <div class="callout-body">
+        <strong>One line each</strong>
+        <p><strong>CI</strong> = test the code when pushed to GitHub — "is it good enough to merge?"<br/>
+           <strong>CD</strong> = deploy the code when merged to main — "ship it to the Salesforce org."</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SECTION 2: WHEN IS IT REQUIRED -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>When Is CI/CD Required</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Situation</th><th>Without CI/CD</th><th>With CI/CD</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>You push broken code</td>
+          <td>Nobody knows until it breaks in the org</td>
+          <td>CI catches it immediately, PR is blocked</td>
+        </tr>
+        <tr>
+          <td>Deploying to Salesforce org</td>
+          <td>You manually run sf deploy every time</td>
+          <td>Happens automatically on every merge</td>
+        </tr>
+        <tr>
+          <td>Team of developers</td>
+          <td>Someone merges bad code, breaks everyone</td>
+          <td>All PRs must pass CI before merge</td>
+        </tr>
+        <tr>
+          <td>Code formatting inconsistency</td>
+          <td>Different styles mixed across files</td>
+          <td>Prettier check enforces consistent format</td>
+        </tr>
+        <tr>
+          <td>Forgetting to run tests</td>
+          <td>Tests are skipped under time pressure</td>
+          <td>CI runs them whether you remember or not</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Even on a solo project</strong>
+        <p>CI/CD is worth setting up. It catches mistakes you'd miss, forces good habits, and is a standard skill every employer expects you to know.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SECTION 3: HOW IT WORKS ON GITHUB -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>How It Works — GitHub Actions</h2>
+    </div>
+
+    <p style="margin-bottom:16px;color:#555;">GitHub has a built-in CI/CD engine called <strong>GitHub Actions</strong>. It is free for public repos. No third-party tools needed. It works by reading a file you create in your repo.</p>
+
+    <div class="concept-box">
+      <h4>How GitHub Actions Works</h4>
+      <p>You create a <code style="background:#e8ecf2;padding:1px 6px;border-radius:3px;font-family:monospace">.yml</code> file inside <code style="background:#e8ecf2;padding:1px 6px;border-radius:3px;font-family:monospace">.github/workflows/</code> in your repo. GitHub reads this file automatically. When a trigger happens (a push, a PR, a merge), GitHub spins up a fresh cloud machine, runs all the steps you defined in the file, and reports green or red on your PR. The machine is deleted after the job finishes.</p>
+    </div>
+
+    <pre><span class="c"># What lives where:</span>
+
+Your repo on GitHub
+  └── .github/
+        └── workflows/
+              ├── ci.yml       <span class="c">← CI: runs on every branch push / PR</span>
+              └── deploy.yml   <span class="c">← CD: runs on every merge to main</span>
+
+<span class="c"># GitHub reads these files automatically — no setup on GitHub's side needed</span></pre>
+
+    <p style="margin: 16px 0 10px; font-weight:600;">What is in a workflow file:</p>
+
+    <pre><span class="k">name</span>: CI
+
+<span class="k">on</span>:                          <span class="c"># WHEN does this run?</span>
+  <span class="k">push</span>:
+    <span class="k">branches-ignore</span>: [main]  <span class="c"># on every branch push except main</span>
+  <span class="k">pull_request</span>:
+    <span class="k">branches</span>: [main]         <span class="c"># on every PR targeting main</span>
+
+<span class="k">jobs</span>:
+  <span class="k">lint-format-test</span>:
+    <span class="k">runs-on</span>: ubuntu-latest   <span class="c"># GitHub spins up a fresh Ubuntu machine</span>
+
+    <span class="k">steps</span>:
+      - <span class="k">uses</span>: actions/checkout@v4         <span class="c"># download your code onto that machine</span>
+      - <span class="k">uses</span>: actions/setup-node@v4       <span class="c"># install Node.js</span>
+        <span class="k">with</span>:
+          <span class="k">node-version</span>: <span class="s">'18'</span>
+          <span class="k">cache</span>: <span class="s">'npm'</span>
+
+      - <span class="k">name</span>: Install dependencies
+        <span class="k">run</span>: npm install
+
+      - <span class="k">name</span>: Run ESLint
+        <span class="k">run</span>: npm run lint
+
+      - <span class="k">name</span>: Check Prettier formatting
+        <span class="k">run</span>: npm run prettier:verify
+
+      - <span class="k">name</span>: Run Jest tests
+        <span class="k">run</span>: npm test</pre>
+  </div>
+
+
+  <!-- PAGE BREAK -->
+  <div class="page-break"></div>
+
+
+  <!-- SECTION 4: WHAT HAPPENS AT EACH STAGE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>What Happens at Each Stage</h2>
+    </div>
+
+    <p style="margin-bottom:20px;color:#555;">Trace exactly what happens from the moment you push code to the moment it is live in your Salesforce org.</p>
+
+    <div class="flow">
+
+      <div class="flow-step">
+        <div class="flow-icon local">💻</div>
+        <div class="flow-body">
+          <strong>You push a branch <span class="tag local">Your Machine</span></strong>
+          <p>You finish coding and push your feature branch to GitHub.</p>
+          <code>git push origin feature/my-new-lwc</code>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon ci">⚡</div>
+        <div class="flow-body">
+          <strong>GitHub Actions triggers automatically <span class="tag auto">GitHub Cloud</span></strong>
+          <p>GitHub sees the push, reads your <code style="background:#eee;padding:1px 5px;border-radius:3px;font-family:monospace">.github/workflows/ci.yml</code> file, and spins up a fresh Ubuntu machine in the cloud. This takes about 10–15 seconds to start.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon ci">📥</div>
+        <div class="flow-body">
+          <strong>Machine downloads your code <span class="tag auto">GitHub Cloud</span></strong>
+          <p>Step 1 of your workflow runs — <code style="background:#eee;padding:1px 5px;border-radius:3px;font-family:monospace">actions/checkout</code> clones your branch onto that machine.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon ci">🔧</div>
+        <div class="flow-body">
+          <strong>Dependencies installed <span class="tag auto">GitHub Cloud</span></strong>
+          <p><code style="background:#eee;padding:1px 5px;border-radius:3px;font-family:monospace">npm install</code> runs — installs ESLint, Jest, Prettier and everything in your package.json.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon ci">🔍</div>
+        <div class="flow-body">
+          <strong>ESLint runs <span class="tag auto">GitHub Cloud</span></strong>
+          <p>Checks all your LWC JavaScript files for errors, bad patterns, and rule violations. If any file has an error — the whole CI job fails here.</p>
+          <code>npm run lint</code>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon ci">✨</div>
+        <div class="flow-body">
+          <strong>Prettier check runs <span class="tag auto">GitHub Cloud</span></strong>
+          <p>Checks that all files (JS, HTML, CSS, Apex, XML) are formatted correctly. Does not auto-fix — just reports what is wrong. If formatting is off — CI fails.</p>
+          <code>npm run prettier:verify</code>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon ci">🧪</div>
+        <div class="flow-body">
+          <strong>Jest tests run <span class="tag auto">GitHub Cloud</span></strong>
+          <p>All test files in <code style="background:#eee;padding:1px 5px;border-radius:3px;font-family:monospace">__tests__/</code> folders are executed. Any failing test fails CI.</p>
+          <code>npm test</code>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon cloud">📊</div>
+        <div class="flow-body">
+          <strong>Result reported on your PR <span class="tag auto">GitHub Cloud</span></strong>
+          <p>GitHub shows the result at the bottom of your Pull Request. Green = all passed. Red = something failed with the exact error shown.</p>
+          <code>✅ Lint, Prettier, Jest — passed in 1m 24s</code>
+          <code style="color:#f85149;">❌ Lint, Prettier, Jest — ESLint: 2 errors in quizApp.js</code>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon cloud">🔀</div>
+        <div class="flow-body">
+          <strong>You merge the PR <span class="tag manual">Manual — GitHub website</span></strong>
+          <p>If CI is green, you click "Merge pull request" on GitHub. If CI is red, the merge button is blocked until you fix and push again.</p>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-icon deploy">🚀</div>
+        <div class="flow-body">
+          <strong>CD triggers — deploy to Salesforce <span class="tag auto">GitHub Cloud</span></strong>
+          <p>Your deploy workflow detects the merge to main, authenticates to your Salesforce org using stored secrets, and runs the deployment. Your LWC is now live.</p>
+          <code>sf project deploy start --source-dir force-app</code>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- SECTION 5: WHAT IS ON THE CLOUD -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>What Lives Where</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Item</th><th>Where it lives</th><th>Who can see it</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Your code files</td>
+          <td>GitHub (cloud)</td>
+          <td>Public — anyone</td>
+        </tr>
+        <tr>
+          <td>.github/workflows/*.yml</td>
+          <td>GitHub (cloud, inside your repo)</td>
+          <td>Public — anyone can see the file</td>
+        </tr>
+        <tr>
+          <td>GitHub Actions runner machine</td>
+          <td>GitHub's cloud servers</td>
+          <td>Nobody — temporary, deleted after job</td>
+        </tr>
+        <tr>
+          <td>Secret names (SF_CLIENT_ID etc.)</td>
+          <td>GitHub Settings → Secrets</td>
+          <td>Anyone can see the name, not the value</td>
+        </tr>
+        <tr>
+          <td>Secret values (actual credentials)</td>
+          <td>GitHub encrypted storage</td>
+          <td>Nobody — not even you after saving</td>
+        </tr>
+        <tr>
+          <td>CI/CD logs (what ran, output)</td>
+          <td>GitHub Actions tab</td>
+          <td>Public on public repos</td>
+        </tr>
+        <tr>
+          <td>Your Salesforce org</td>
+          <td>Salesforce cloud</td>
+          <td>Only authenticated users</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout tip">
+      <div class="callout-icon">✅</div>
+      <div class="callout-body">
+        <strong>Secrets are safe</strong>
+        <p>Even though your .yml file is public, nobody can see your actual credential values. GitHub injects them only at runtime inside the private job machine. They never appear in logs — GitHub masks them with ***.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PAGE BREAK -->
+  <div class="page-break"></div>
+
+
+  <!-- SECTION 6: GITHUB SECRETS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2>GitHub Secrets — Storing Credentials Safely</h2>
+    </div>
+
+    <p style="margin-bottom:16px;color:#555;">You never put passwords or credentials directly in your code or workflow file. GitHub Secrets is the secure way to store them.</p>
+
+    <div class="concept-box">
+      <h4>How to add a secret</h4>
+      <p>Go to your repo on GitHub → <strong>Settings</strong> → <strong>Secrets and variables</strong> → <strong>Actions</strong> → <strong>New repository secret</strong> → enter name and value → Save. The value is encrypted immediately and can never be read back.</p>
+    </div>
+
+    <div class="secret-box">
+      <div class="secret-label">// Secrets needed for Salesforce CD deployment</div>
+      <table>
+        <thead>
+          <tr><th>Secret Name</th><th>What it holds</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SF_CLIENT_ID</td>
+            <td>Consumer key from your Salesforce Connected App</td>
+          </tr>
+          <tr>
+            <td>SF_USERNAME</td>
+            <td>Your Salesforce org username (email)</td>
+          </tr>
+          <tr>
+            <td>SF_PRIVATE_KEY</td>
+            <td>Private key for JWT authentication</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <pre><span class="c"># In your workflow file you reference secrets like this:</span>
+<span class="c"># The actual values are NEVER written in the file</span>
+
+- <span class="k">name</span>: Authenticate to Salesforce
+  <span class="k">run</span>: |
+    sf org login jwt \
+      --client-id <span class="v">${{ secrets.SF_CLIENT_ID }}</span> \
+      --username <span class="v">${{ secrets.SF_USERNAME }}</span> \
+      --jwt-key-file server.key \
+      --instance-url https://login.salesforce.com
+
+<span class="c"># Anyone reading your .yml sees:  ${{ secrets.SF_CLIENT_ID }}</span>
+<span class="c"># GitHub injects:                 your-actual-consumer-key-value</span>
+<span class="c"># In logs it shows:               ***</span></pre>
+  </div>
+
+
+  <!-- SECTION 7: SETUP STEPS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2>How to Set It Up — Step by Step</h2>
+    </div>
+
+    <p style="margin-bottom:8px;font-weight:700;color:#7c3aed;">PHASE 1 — CI Setup (do this first)</p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-icon local">1️⃣</div>
+        <div class="flow-body">
+          <strong>Create the workflows folder in your repo</strong>
+          <code>mkdir -p .github/workflows</code>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon local">2️⃣</div>
+        <div class="flow-body">
+          <strong>Create the CI workflow file</strong>
+          <p>Create <code style="background:#eee;padding:1px 5px;border-radius:3px;font-family:monospace">.github/workflows/ci.yml</code> with the lint + prettier + test steps shown in Section 3.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon local">3️⃣</div>
+        <div class="flow-body">
+          <strong>Commit and push it</strong>
+          <code>git add .github/workflows/ci.yml</code>
+          <code>git commit -m "Add GitHub Actions CI workflow"</code>
+          <code>git push origin your-branch</code>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon cloud">4️⃣</div>
+        <div class="flow-body">
+          <strong>Enable branch protection on GitHub</strong>
+          <p>GitHub repo → Settings → Branches → Add rule for <code style="background:#eee;padding:1px 5px;border-radius:3px;font-family:monospace">main</code></p>
+          <p>☑ Require a pull request before merging<br/>
+             ☑ Require status checks to pass before merging → select your CI job<br/>
+             ☑ Require branches to be up to date before merging</p>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin: 24px 0 8px;font-weight:700;color:#7c3aed;">PHASE 2 — CD Setup (after CI is working)</p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-icon cloud">1️⃣</div>
+        <div class="flow-body">
+          <strong>Create a Connected App in Salesforce</strong>
+          <p>Salesforce Setup → App Manager → New Connected App → enable OAuth → generate certificate. This gives you a Consumer Key (Client ID).</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon cloud">2️⃣</div>
+        <div class="flow-body">
+          <strong>Store credentials as GitHub Secrets</strong>
+          <p>Add SF_CLIENT_ID, SF_USERNAME, SF_PRIVATE_KEY in GitHub repo Settings → Secrets.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon local">3️⃣</div>
+        <div class="flow-body">
+          <strong>Create the deploy workflow file</strong>
+          <p>Create <code style="background:#eee;padding:1px 5px;border-radius:3px;font-family:monospace">.github/workflows/deploy.yml</code> that triggers on merge to main, authenticates to Salesforce, and runs sf project deploy.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-icon deploy">4️⃣</div>
+        <div class="flow-body">
+          <strong>Test it — merge a PR and watch the deploy</strong>
+          <p>After merging, go to the Actions tab on GitHub. You will see the deploy job running in real time with logs for every step.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SECTION 8: YOUR COMPLETE LOOP -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <h2>Your Complete Developer Loop With CI/CD</h2>
+    </div>
+
+    <div class="quick-ref">
+      <h3>// every feature — from idea to live in org</h3>
+
+      <div class="qr-group">
+        <div class="qr-label"># 1. Start the feature (local)</div>
+        <div class="qr-line">
+          <span style="color:#79c0ff">git checkout</span> main<br/>
+          <span style="color:#79c0ff">git pull</span> origin main<br/>
+          <span style="color:#79c0ff">git checkout</span> <span style="color:#ffa657">-b</span> <span style="color:#a5d6ff">feature/my-new-lwc</span>
+        </div>
+      </div>
+
+      <div class="qr-group">
+        <div class="qr-label"># 2. Build and commit (local)</div>
+        <div class="qr-line">
+          <span style="color:#8b949e">// write your LWC code...</span><br/>
+          <span style="color:#79c0ff">git add</span> <span style="color:#a5d6ff">force-app/main/default/lwc/myNewLwc/</span><br/>
+          <span style="color:#79c0ff">git commit</span> <span style="color:#ffa657">-m</span> <span style="color:#a5d6ff">"Add myNewLwc component with event handling"</span>
+        </div>
+      </div>
+
+      <div class="qr-group">
+        <div class="qr-label"># 3. Push to GitHub — CI starts automatically</div>
+        <div class="qr-line">
+          <span style="color:#79c0ff">git push</span> origin <span style="color:#a5d6ff">feature/my-new-lwc</span><br/>
+          <span style="color:#8b949e">// GitHub Actions starts running lint + prettier + tests</span>
+        </div>
+      </div>
+
+      <div class="qr-group">
+        <div class="qr-label"># 4. Open PR on github.com (manual)</div>
+        <div class="qr-line">
+          <span style="color:#8b949e">// Go to github.com/amit1365/udLWC</span><br/>
+          <span style="color:#8b949e">// Click "Compare & pull request" → Create pull request</span><br/>
+          <span style="color:#8b949e">// Watch CI result at the bottom of the PR</span>
+        </div>
+      </div>
+
+      <div class="qr-group">
+        <div class="qr-label"># 5. If CI fails — fix and push again</div>
+        <div class="qr-line">
+          <span style="color:#8b949e">// Read the error in GitHub Actions tab</span><br/>
+          <span style="color:#8b949e">// Fix the issue locally</span><br/>
+          <span style="color:#79c0ff">git add</span> . <span style="color:#8b949e">&&</span> <span style="color:#79c0ff">git commit</span> <span style="color:#ffa657">-m</span> <span style="color:#a5d6ff">"Fix lint error in myNewLwc"</span><br/>
+          <span style="color:#79c0ff">git push</span> origin <span style="color:#a5d6ff">feature/my-new-lwc</span><br/>
+          <span style="color:#8b949e">// CI reruns automatically</span>
+        </div>
+      </div>
+
+      <div class="qr-group">
+        <div class="qr-label"># 6. CI green → merge on github.com (manual)</div>
+        <div class="qr-line">
+          <span style="color:#8b949e">// Click "Merge pull request" on GitHub</span><br/>
+          <span style="color:#8b949e">// CD triggers automatically → deploys to Salesforce org</span>
+        </div>
+      </div>
+
+      <div class="qr-group">
+        <div class="qr-label"># 7. Clean up (local)</div>
+        <div class="qr-line">
+          <span style="color:#79c0ff">git checkout</span> main<br/>
+          <span style="color:#79c0ff">git pull</span> origin main<br/>
+          <span style="color:#79c0ff">git branch</span> <span style="color:#ffa657">-d</span> <span style="color:#a5d6ff">feature/my-new-lwc</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- SECTION 9: QUICK REFERENCE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">9</div>
+      <h2>Quick Reference</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Term</th><th>What it means</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>CI</td><td>Continuous Integration — automated checks on every push/PR</td></tr>
+        <tr><td>CD</td><td>Continuous Deployment — automated deploy on every merge to main</td></tr>
+        <tr><td>GitHub Actions</td><td>GitHub's built-in CI/CD engine, free for public repos</td></tr>
+        <tr><td>Workflow file (.yml)</td><td>The file that defines what GitHub Actions runs and when</td></tr>
+        <tr><td>Runner</td><td>The temporary cloud machine GitHub spins up to run your job</td></tr>
+        <tr><td>Job</td><td>A set of steps that run together on one machine</td></tr>
+        <tr><td>Step</td><td>One single command inside a job (npm install, npm test etc.)</td></tr>
+        <tr><td>Trigger (on:)</td><td>The event that starts the workflow (push, pull_request, merge)</td></tr>
+        <tr><td>GitHub Secrets</td><td>Encrypted storage for credentials — safe, never shown in logs</td></tr>
+        <tr><td>Branch protection</td><td>GitHub setting that blocks merging if CI is red</td></tr>
+        <tr><td>Actions tab</td><td>Page on GitHub where you watch CI/CD jobs run in real time</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body">
+        <strong>Never put credentials in your workflow file or code</strong>
+        <p>Always use GitHub Secrets for passwords, keys, and tokens. The .yml file is public — only the secret name goes there, never the value.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <div style="margin-top:50px;padding-top:20px;border-top:2px solid #e8ecf2;text-align:center;color:#aaa;font-size:12px;">
+    CI/CD Complete Guide &nbsp;·&nbsp; GitHub Actions &nbsp;·&nbsp; Salesforce LWC Project &nbsp;·&nbsp; For revision use
+  </div>
+
+</div>
+</body>
+</html>
