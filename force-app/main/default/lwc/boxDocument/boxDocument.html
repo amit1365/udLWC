@@ -1,0 +1,103 @@
+<template>
+    <lightning-card title="Box Documents" icon-name="doctype:attachment">
+        
+        <div class="slds-m-around_medium">
+
+            <!-- Error Message -->
+            <template if:true={error}>
+                <div class="slds-notify slds-notify_alert slds-theme_error">
+                    {error}
+                </div>
+            </template>
+
+            <!-- Success Message -->
+            <template if:true={successMessage}>
+                <div class="slds-notify slds-notify_alert slds-theme_success">
+                    {successMessage}
+                </div>
+            </template>
+
+            <!-- Buttons Row -->
+            <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                
+                <div class="slds-col">
+                    <lightning-button
+                        label="Create Folder"
+                        icon-name="utility:add"
+                        onclick={handleCreateFolder}
+                        disabled={isLoading}>
+                    </lightning-button>
+                </div>
+
+                <div class="slds-col">
+                    <lightning-button
+                        label="Show Files"
+                        icon-name="utility:file"
+                        onclick={handleShowFiles}
+                        disabled={isLoading}>
+                    </lightning-button>
+                </div>
+
+                <lightning-button
+                    label="Upload File"
+                    icon-name="utility:upload"
+                    onclick={handleUploadClick}
+                    disabled={isLoading}>
+                </lightning-button>
+
+                <input 
+                    type="file" 
+                    accept=".pdf,.docx,.xlsx,.png,.jpg"
+                    onchange={handleFileChange}
+                    class="slds-hide"
+                    data-id="fileInput">
+                
+
+            </div>
+
+            <!-- Loading Spinner -->
+            <template if:true={isLoading}>
+                <lightning-spinner 
+                    alternative-text="Loading" 
+                    size="small">
+                </lightning-spinner>
+            </template>
+
+            <!-- File List -->
+            <template if:true={hasFiles}>
+
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={files} for:item="file">
+                            <tr key={file.id}>
+                                <td>{file.name}</td>
+                                <td>{file.type}</td>
+                                <td>
+                                    <lightning-button
+                                        label="Open in Box"
+                                        data-id={file.id}
+                                        onclick={handleOpenFile}>
+                                    </lightning-button>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+
+            <!-- No Files Message -->
+            <template if:true={noFiles}>
+                <p class="slds-text-color_weak">No files found in this folder.</p>
+            </template>
+
+        </div>
+
+    </lightning-card>
+</template>

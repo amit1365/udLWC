@@ -1,0 +1,45 @@
+<template>
+
+    
+    <lightning-card title="Job Application List" icon-name="standard:contact">
+        <div class="slds-p-around_medium">
+
+            <template lwc:if={isLoading}>
+                <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+            </template>
+
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col">Name</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Stage</th>
+                        <th scope="col">Mark Accepted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={jobAppList} for:item="jobApp">
+                        <tr key={jobApp.Id} class="slds-hint-parent">
+                            <td>{jobApp.Name}</td>
+                            <td>{jobApp.contactName}</td>
+                            <td>{jobApp.Status__c}</td>
+                            <td>
+                                <!-- data-id binds the unique row ID to the button click event -->
+                                <lightning-button 
+                                    label="Accept Offer" 
+                                    variant="brand"
+                                    data-id={jobApp.Id} 
+                                    onclick={handleChangeStatus}
+                                    disabled={jobApp.isOfferAccepted}>
+                                </lightning-button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+            <template lwc:if={error}>
+                <p style="color:red;">{error}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

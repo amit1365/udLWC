@@ -1,0 +1,13 @@
+<template>
+
+<lightning-carousel disable-auto-scroll>
+            <template for:each={arrayOfStructures} for:item="item">
+                <lightning-carousel-image
+                key={item.Number}
+                src ={item.src}
+                header ={item.Number}
+                description ={item.Text}>
+            </lightning-carousel-image>
+            </template>
+        </lightning-carousel>
+</template>

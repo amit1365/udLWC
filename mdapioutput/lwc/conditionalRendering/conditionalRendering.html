@@ -1,0 +1,30 @@
+<template>
+    <lightning-modal-header label="Conditional Rendering"></lightning-modal-header>
+
+    <lightning-modal-body> 
+        <br/>
+        <div class="slds-m-around_medium">
+         
+        <br/>
+        <div align ="center">
+
+            <template if:true = {showImageVar}>
+                    <img src={imageURL} alt="Image">
+                <lightning-button label="Hide Image" onclick={hideImage}></lightning-button>
+            </template>
+
+            <template if:false = {showImageVar}>
+                <lightning-button label="Show Image" onclick={showImage}></lightning-button>
+            </template>
+
+        </div>
+     <br/>
+     </div>
+    </lightning-modal-body>
+
+    <!--<lightning-modal-footer>
+        <lightning-button label="OK"></lightning-button>
+    </lightning-modal-footer>
+    -->
+
+</template>

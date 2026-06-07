@@ -1,0 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+>>>>>>> a09204353c3c45f64bcca3ef09c34240b3a113b9
+npm run precommit

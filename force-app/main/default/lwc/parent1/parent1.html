@@ -1,0 +1,22 @@
+<template>
+    <lightning-card  title="Parent1">
+
+        <p class="slds-p-horizontal_small">
+            {isChildVisible}
+
+            <template if:false={isChildVisible}>
+            Click the button to see the child component
+            <br/>
+            <lightning-button label="Show Child" onclick={handleClick}></lightning-button>
+        </template>
+            
+            <template if:true={isChildVisible}>
+                <c-child1></c-child1>
+                Click the button to hide the child component
+            <lightning-button label="Hide Child" onclick={handleClick}></lightning-button>
+            </template>
+
+        </p>
+        <p slot="footer"></p>
+    </lightning-card>
+</template>
