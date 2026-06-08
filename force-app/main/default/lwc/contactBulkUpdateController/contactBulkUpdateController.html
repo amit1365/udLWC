@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Editable Contacts Datatable" icon-name="standard:account">
+        <div class="slds-m-around_medium">
+            <template lwc:if={isLoading}>
+                <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+            </template>
+            <template lwc:if={contactList.length}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={contactList}
+                    columns={columns}
+                    draft-values={draftValues}
+                    errors={errors}
+                    onsave={handleSave}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+            <template lwc:else>
+                <p>No Contacts found.</p>
+            </template>
+            <template lwc:if={error}>
+                <p style="color:red;">{errorMessage}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
